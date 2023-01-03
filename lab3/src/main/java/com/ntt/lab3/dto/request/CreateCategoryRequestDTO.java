@@ -3,11 +3,13 @@ package com.ntt.lab3.dto.request;
 import java.io.Serializable;
 
 public class CreateCategoryRequestDTO implements Serializable {
-        private int id;
-        private String name;
 
-        public CreateCategoryRequestDTO() {
-        }
+    private int id;
+    
+    private String name;
+
+    public CreateCategoryRequestDTO() {
+    }
 
     public CreateCategoryRequestDTO(int id, String name) {
         this.id = id;
@@ -15,19 +17,20 @@ public class CreateCategoryRequestDTO implements Serializable {
     }
 
     public int getId() {
-            return id;
-        }
+        return id;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
 }

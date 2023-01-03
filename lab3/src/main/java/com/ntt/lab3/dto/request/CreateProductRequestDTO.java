@@ -3,16 +3,21 @@ package com.ntt.lab3.dto.request;
 import java.io.Serializable;
 
 public class CreateProductRequestDTO implements Serializable {
+
     private int id;
+
     private String name;
+
     private long price;
+
     private String salerName;
+
     private boolean isDeleted;
+
     private int categoryId;
 
     public CreateProductRequestDTO() {
     }
-
 
     public int getId() {
         return id;

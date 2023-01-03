@@ -4,10 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class CreateOrderRequestDTO implements Serializable {
+
     private int id;
+
     private long totalPay;
+
     private Date orderDate;
+
     private boolean status;
+    
     private int cartId;
 
     public CreateOrderRequestDTO(int id, long totalPay, Date orderDate, boolean status, int cartId) {

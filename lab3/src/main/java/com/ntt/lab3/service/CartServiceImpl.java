@@ -9,6 +9,7 @@ import com.ntt.lab3.repository.CartRepository;
 import java.util.List;
 @Component
 public class CartServiceImpl implements CartService{
+
     @Autowired
     private CartRepository cartRepository;
 
@@ -18,7 +19,6 @@ public class CartServiceImpl implements CartService{
         return (List<Cart>) cartIterable;
     }
 
-
     @Override
     public Cart insertCart(InsertCartRequestDTO requestDTO) {
         Cart cart= new Cart();
@@ -26,4 +26,5 @@ public class CartServiceImpl implements CartService{
         cartRepository.save(cart);
         return cart;
     }
+    
 }

@@ -9,6 +9,7 @@ import com.ntt.lab3.repository.CategoryRepository;
 import java.util.List;
 @Component
 public class CategoryServiceImpl implements CategoryService{
+
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -18,7 +19,6 @@ public class CategoryServiceImpl implements CategoryService{
         return (List<Category>) categoryIterable;
     }
 
-
     @Override
     public Category insertCategory(InsertCategoryRequestDTO requestDTO) {
         Category category= new Category();
@@ -26,4 +26,5 @@ public class CategoryServiceImpl implements CategoryService{
         categoryRepository.save(category);
         return category;
     }
+    
 }

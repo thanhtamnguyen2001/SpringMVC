@@ -11,9 +11,15 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateOrderRequestDTO implements Serializable {
+
     private int id;
+
     private long totalPay;
+
     private Date orderDate;
+
     private boolean status;
+
     private int cartId;
+    
 }

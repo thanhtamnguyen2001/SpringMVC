@@ -19,4 +19,5 @@ public class PagingUserListResponseDTO implements Serializable {
     private Integer page;
 
     private String sort;
+    
 }

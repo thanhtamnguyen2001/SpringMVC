@@ -6,7 +6,9 @@ import com.ntt.lab3.entity.Cart;
 import java.util.List;
 
 public interface CartService {
+
     List<Cart> getAllCartDatabase();
 
     Cart insertCart(InsertCartRequestDTO requestDTO);
+    
 }

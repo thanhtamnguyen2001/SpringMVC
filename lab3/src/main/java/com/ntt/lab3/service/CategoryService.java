@@ -6,7 +6,9 @@ import com.ntt.lab3.entity.Category;
 import java.util.List;
 
 public interface CategoryService {
+
     List<Category> getAllCategoryDatabase();
 
     Category insertCategory(InsertCategoryRequestDTO requestDTO);
+    
 }

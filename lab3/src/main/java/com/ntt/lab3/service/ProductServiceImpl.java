@@ -3,14 +3,13 @@ package com.ntt.lab3.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.ntt.lab3.dto.request.InsertProductRequestDTO;
-import com.ntt.lab3.dto.request.InsertProductRequestDTO;
-import com.ntt.lab3.entity.Product;
 import com.ntt.lab3.entity.Product;
 import com.ntt.lab3.repository.ProductRepository;
 
 import java.util.List;
 @Component
 public class ProductServiceImpl implements ProductService{
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -32,4 +31,5 @@ public class ProductServiceImpl implements ProductService{
         productRepository.save(product);
         return product;
     }
+    
 }

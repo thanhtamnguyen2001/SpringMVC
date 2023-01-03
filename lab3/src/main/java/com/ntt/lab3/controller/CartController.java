@@ -27,11 +27,4 @@ public class CartController {
         return new ResponseEntity(cart, HttpStatus.OK);
     }
 
-
-
-//
-//    @DeleteMapping("/{cart-id}")
-//    public ResponseEntity deleteCart(@PathVariable(value = "cart-id") int cartId) {
-//        return new ResponseEntity(HttpStatus.NO_CONTENT);
-//    }
 }

@@ -4,13 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class CreateUserRequestDTO implements Serializable {
+
     private int id;
+
     private String username;
+
     private String name;
+
     private String password;
+
     private String phone;
+
     private String gender;
+
     private String email;
+
     private Date birthday;
 
     public CreateUserRequestDTO() {
@@ -90,4 +98,5 @@ public class CreateUserRequestDTO implements Serializable {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+    
 }

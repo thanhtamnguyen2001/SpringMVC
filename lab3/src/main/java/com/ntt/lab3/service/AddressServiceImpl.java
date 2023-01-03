@@ -9,6 +9,7 @@ import com.ntt.lab3.repository.AddressRepository;
 import java.util.List;
 @Component
 public class AddressServiceImpl implements AddressService{
+
     @Autowired
     private AddressRepository addressRepository;
 
@@ -17,7 +18,6 @@ public class AddressServiceImpl implements AddressService{
         Iterable<Address> addressIterable = addressRepository.findAll();
         return (List<Address>) addressIterable;
     }
-
 
     @Override
     public Address insertAddress(InsertAddressRequestDTO requestDTO) {
@@ -34,4 +34,5 @@ public class AddressServiceImpl implements AddressService{
         addressRepository.save(address);
         return address;
     }
+    
 }

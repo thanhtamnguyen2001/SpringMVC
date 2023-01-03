@@ -10,6 +10,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartResponseDTO implements Serializable {
+
     private int id;
+
     private int userId;
+    
+    
 }

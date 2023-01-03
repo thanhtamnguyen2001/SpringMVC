@@ -9,6 +9,7 @@ import com.ntt.lab3.repository.OrderRepository;
 import java.util.List;
 @Component
 public class OrderServiceImpl implements OrderService{
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -17,7 +18,6 @@ public class OrderServiceImpl implements OrderService{
         Iterable<Order> orderIterable = orderRepository.findAll();
         return (List<Order>) orderIterable;
     }
-
 
     @Override
     public Order insertOrder(InsertOrderRequestDTO requestDTO) {
@@ -29,4 +29,5 @@ public class OrderServiceImpl implements OrderService{
         orderRepository.save(order);
         return order;
     }
+    
 }

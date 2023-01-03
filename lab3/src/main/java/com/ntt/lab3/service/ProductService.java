@@ -6,7 +6,9 @@ import com.ntt.lab3.entity.Product;
 import java.util.List;
 
 public interface ProductService {
+
     List<Product> getAllProductDatabase();
 
     Product insertProduct(InsertProductRequestDTO requestDTO);
+    
 }

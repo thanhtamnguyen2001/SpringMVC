@@ -9,6 +9,7 @@ import com.ntt.lab3.repository.UserRepository;
 import java.util.List;
 @Component
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -17,7 +18,6 @@ public class UserServiceImpl implements UserService {
         Iterable<User> userIterable = userRepository.findAll();
         return (List<User>) userIterable;
     }
-
 
     @Override
     public User insertUser(InsertUserRequestDTO requestDTO) {
@@ -33,4 +33,5 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return user;
     }
+    
 }

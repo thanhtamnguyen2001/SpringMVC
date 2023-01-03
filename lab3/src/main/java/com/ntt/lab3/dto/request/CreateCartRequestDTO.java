@@ -3,7 +3,9 @@ package com.ntt.lab3.dto.request;
 import java.io.Serializable;
 
 public class CreateCartRequestDTO implements Serializable {
+
     private int id;
+
     private int userId;
 
     public CreateCartRequestDTO(int id, int userId) {
@@ -26,4 +28,6 @@ public class CreateCartRequestDTO implements Serializable {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+    
+    
 }

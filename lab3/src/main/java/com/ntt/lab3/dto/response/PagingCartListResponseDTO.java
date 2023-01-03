@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PagingCartListResponseDTO implements Serializable {
+
     private List<CartResponseDTO> cartResponseDTOList;
 
     private Integer size;
@@ -17,4 +18,5 @@ public class PagingCartListResponseDTO implements Serializable {
     private Integer page;
 
     private String sort;
+    
 }

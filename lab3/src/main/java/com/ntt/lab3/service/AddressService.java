@@ -6,7 +6,9 @@ import com.ntt.lab3.entity.Address;
 import java.util.List;
 
 public interface AddressService {
+
     List<Address> getAllAddressDatabase();
 
     Address insertAddress(InsertAddressRequestDTO requestDTO);
+    
 }
