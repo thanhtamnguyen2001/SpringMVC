@@ -1,5 +1,6 @@
-package r2s.com.demo.lab04.dto.response;
+package com.r2s.ntt.dto.response;
 
+import com.r2s.ntt.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductResponseDTO implements Serializable {
-    private int id;
+
+    private Integer id;
+
     private String name;
-    private long price;
-    private String salerName;
-    private boolean isDeleted;
-    private int categoryId;
+
+    private Double price;
+
+    private Integer quantity;
 }

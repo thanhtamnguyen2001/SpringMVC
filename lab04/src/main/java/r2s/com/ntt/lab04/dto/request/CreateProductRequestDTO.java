@@ -1,19 +1,23 @@
-package r2s.com.demo.lab04.dto.request;
+package com.r2s.ntt.dto.request;
 
+import com.r2s.ntt.dto.response.CategoryResponseDTO;
+import com.r2s.ntt.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateProductRequestDTO implements Serializable {
-    private int id;
-    private String name;
-    private long price;
-    private String salerName;
-    private boolean isDeleted;
-    private int categoryId;
 
+    private String name;
+
+    private Double price;
+
+    private Integer quantity;
+
+    private CategoryResponseDTO category;
 }

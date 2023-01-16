@@ -1,58 +1,70 @@
-package r2s.com.ntt.lab04.controller;
+package com.r2s.ntt.controller;
 
+import com.r2s.ntt.dto.request.CreateAddressRequestDTO;
+import com.r2s.ntt.dto.request.CreateCategoryRequestDTO;
+import com.r2s.ntt.dto.request.UpdateAddressRequestDTO;
+import com.r2s.ntt.dto.request.UpdateCategoryRequestDTO;
+import com.r2s.ntt.dto.response.*;
+import com.r2s.ntt.entity.Category;
+import com.r2s.ntt.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import r2s.com.demo.lab04.dto.request.InsertCategoryRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateCategoryRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateCategoryRequestDTO;
-import r2s.com.demo.lab04.dto.response.CategoryResponseDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.dto.response.CategoryResponseDTO;
-import r2s.com.demo.lab04.dto.response.CategoryResponseDTO;
-import r2s.com.demo.lab04.entity.Category;
-import r2s.com.demo.lab04.service.CategoryService;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-@RestController()
-@RequestMapping(value = "/category")
-public class CategoryController {
+@RestController
+@RequestMapping(value = "category")
+public class CategoryController implements Serializable {
     @Autowired
-    private CategoryService categoryService;
+    CategoryService categoryService;
 
+    @GetMapping(value = "/get-all")
+    public ResponseEntity getAllCategory(Pageable pageable) {
 
-    @GetMapping
-    public ResponseEntity<?> getCategoryPaging() {
-        PageResponseDTO pageResponseDTO = categoryService.getCategoryPaging();
-        return new ResponseEntity<>(pageResponseDTO, HttpStatus.OK);
+        PagingResponseDTO pagingResponseDTO = categoryService.getAllCategory(pageable);
+
+        return new ResponseEntity<>(pagingResponseDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{category-id}")
-    public ResponseEntity<?> getCategoryById(@PathVariable(value = "category-id") int categoryId) {
-        CategoryResponseDTO CategoryResponseDTO = categoryService.getCategorybyId(categoryId);
-        return new ResponseEntity<>(CategoryResponseDTO, HttpStatus.OK);
+    @GetMapping(value = "/{category-id}")
+    public ResponseEntity getCategoryById(@PathVariable("category-id") Integer categoryId) {
+
+        CategoryResponseDTO categoryResponse = this.categoryService.getCategoryById(categoryId);
+
+        return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
     }
-    
+
     @PostMapping
-    public ResponseEntity insertCategory(@RequestBody InsertCategoryRequestDTO requestDTO) {
-        Category category = categoryService.insertCategory(requestDTO);
-        return new ResponseEntity(category, HttpStatus.OK);
-    }
+    public ResponseEntity insertCategory(@RequestBody CreateCategoryRequestDTO createCategoryRequestDTO) {
+        CategoryResponseDTO categoryResponseDTO = this.categoryService.createCategory(createCategoryRequestDTO);
 
+        return new ResponseEntity<>(categoryResponseDTO, HttpStatus.OK);
+    }
 
     @PutMapping("/{category-id}")
-    public ResponseEntity updateCategory(@PathVariable(value = "category-id") int categoryId,
-                                     @RequestBody UpdateCategoryRequestDTO updateCategoryRequestDTO) {
-        CategoryResponseDTO response = categoryService.updateCategory(updateCategoryRequestDTO, categoryId);
-        return new ResponseEntity(response, HttpStatus.OK);
+    public ResponseEntity updateCategory(@PathVariable("category-id") Integer categoryId,
+                                        @RequestBody UpdateCategoryRequestDTO updateCategoryRequestDTO) {
+        UpdateCategoryResponseDTO response = this.categoryService.updateCategory(categoryId, updateCategoryRequestDTO);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-
     @DeleteMapping("/{category-id}")
-    public ResponseEntity deleteCategory(@PathVariable(value = "category-id") int categoryId) {
-        categoryService.deleteCategorybyId(categoryId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    public ResponseEntity deleteCategory(@PathVariable("category-id") Integer categoryId) {
+        this.categoryService.deleteCategoryTemporarily(categoryId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{category-id}/products")
+    public ResponseEntity getProductByCategoryId(@PathVariable("category-id") Integer categoryId) {
+        ProductOfCategoryResponseDTO productOfCategoryResponseDTO = this.categoryService.getProductByCategoryId(categoryId);
+
+        return new ResponseEntity<>(productOfCategoryResponseDTO, HttpStatus.OK);
     }
 }

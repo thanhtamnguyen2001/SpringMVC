@@ -1,17 +1,18 @@
-package r2s.com.demo.lab04.repository;
+package com.r2s.ntt.repository;
 
+import com.r2s.ntt.entity.Category;
+import com.r2s.ntt.entity.Employer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-import r2s.com.demo.lab04.entity.User;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
-@Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UserRepository extends CrudRepository<Employer, Integer> {
 
+    Optional<Page<Employer>> findAllByIsDeleted(Boolean isDeleted, Pageable pageable);
 
-    Optional<Page<User>> findAll(Pageable pageable);
+    Boolean existsByUsername(String username);
+
+    Optional<Page<Category>> findAll(Pageable pageable);
 }

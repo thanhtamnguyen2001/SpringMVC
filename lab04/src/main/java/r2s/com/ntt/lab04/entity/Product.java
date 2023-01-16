@@ -1,28 +1,47 @@
-package r2s.com.demo.lab04.entity;
+package com.r2s.ntt.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-@Data
-@Entity(name = "PRODUCT")
-public class Product {
+import java.io.Serializable;
+import java.util.Date;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "PRODUCT")
+public class Product implements Serializable {
+
     @Id
-    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
 
     @Column(name = "NAME")
     private String name;
 
     @Column(name = "PRICE")
-    private long price;
+    private Double price;
 
-    @Column(name = "SALER_NAME")
-    private String salerName;
+    @Column(name = "QUANTITY")
+    private Integer quantity;
+
+    @Column(name = "CREATED_DATE")
+    private Date createdDate;
+
+    @Column(name = "UPDATED_DATE")
+    private Date updatedDate;
 
     @Column(name = "IS_DELETED")
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
-    @Column(name = "CATEGORY_ID")
-    private int categoryId;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID",  referencedColumnName = "id", nullable = false)
+    private Employer userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "id", nullable = false)
+    private Category categoryId;
 }

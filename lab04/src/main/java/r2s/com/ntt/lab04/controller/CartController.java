@@ -1,56 +1,58 @@
-package r2s.com.ntt.lab04.controller;
+package com.r2s.ntt.controller;
 
+import com.r2s.ntt.dto.request.CreateCartRequestDTO;
+import com.r2s.ntt.dto.request.CreateCategoryRequestDTO;
+import com.r2s.ntt.dto.request.CreateOrderRequestDTO;
+import com.r2s.ntt.dto.request.UpdateOrderRequestDTO;
+import com.r2s.ntt.dto.response.*;
+import com.r2s.ntt.entity.Cart;
+import com.r2s.ntt.service.CartService;
+import com.r2s.ntt.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import r2s.com.demo.lab04.dto.request.InsertCartRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateCartRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateCartRequestDTO;
-import r2s.com.demo.lab04.dto.response.CartResponseDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.dto.response.CartResponseDTO;
-import r2s.com.demo.lab04.entity.Cart;
-import r2s.com.demo.lab04.service.CartService;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-@RestController()
-@RequestMapping(value = "/cart")
+@RestController
+@RequestMapping("cart")
 public class CartController {
+
     @Autowired
-    private CartService cartService;
+    CartService cartService;
 
+    @GetMapping(value = "/get-all")
+    public ResponseEntity getAllCart(Pageable pageable) {
 
-    @GetMapping
-    public ResponseEntity<?> getCartPaging() {
-        PageResponseDTO pageResponseDTO = cartService.getCartPaging();
-        return new ResponseEntity<>(pageResponseDTO, HttpStatus.OK);
+        PagingResponseDTO pagingResponseDTO = cartService.getAllCart(pageable);
+
+        return new ResponseEntity<>(pagingResponseDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{cart-id}")
-    public ResponseEntity<?> getCartById(@PathVariable(value = "cart-id") int cartId) {
-        CartResponseDTO CartResponseDTO = cartService.getCartbyId(cartId);
-        return new ResponseEntity<>(CartResponseDTO, HttpStatus.OK);
+    @GetMapping(value = "/{cart-id}")
+    public ResponseEntity getCartById(@PathVariable("cart-id") Integer cartId) {
+
+        CartResponseDTO cartResponseDTO = this.cartService.getCartById(cartId);
+
+        return new ResponseEntity<>(cartResponseDTO, HttpStatus.OK);
     }
-    
+
     @PostMapping
-    public ResponseEntity insertCart(@RequestBody InsertCartRequestDTO requestDTO) {
-        Cart cart = cartService.insertCart(requestDTO);
-        return new ResponseEntity(cart, HttpStatus.OK);
+    public ResponseEntity insertCart(@RequestBody CreateCartRequestDTO createCartRequestDTO) {
+
+        CartResponseDTO cartResponseDTO = this.cartService.createCart(createCartRequestDTO);
+
+        return new ResponseEntity<>(cartResponseDTO, HttpStatus.OK);
     }
 
-    @PutMapping("/{Cart-id}")
-    public ResponseEntity updateCart(@PathVariable(value = "Cart-id") int CartId,
-                                     @RequestBody UpdateCartRequestDTO updateCartRequestDTO) {
-        CartResponseDTO response = cartService.updateCart(updateCartRequestDTO, CartId);
-        return new ResponseEntity(response, HttpStatus.OK);
-    }
+    @DeleteMapping("/{cart-id}")
+    public ResponseEntity deleteCart(@PathVariable("cart-id") Integer cartId) {
+        this.cartService.deleteCartTemporarily(cartId);
 
-
-    @DeleteMapping("/{Cart-id}")
-    public ResponseEntity deleteCart(@PathVariable(value = "Cart-id") int CartId) {
-        cartService.deleteCartbyId(CartId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

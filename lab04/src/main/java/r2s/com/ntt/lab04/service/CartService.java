@@ -1,23 +1,23 @@
-package r2s.com.demo.lab04.service;
+package com.r2s.ntt.service;
 
-import r2s.com.demo.lab04.dto.request.InsertCartRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateCartRequestDTO;
-import r2s.com.demo.lab04.dto.response.CartResponseDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.entity.Cart;
+import com.r2s.ntt.dto.request.CreateCartRequestDTO;
+import com.r2s.ntt.dto.request.CreateUserRequestDTO;
+import com.r2s.ntt.dto.request.UpdateCategoryRequestDTO;
+import com.r2s.ntt.dto.request.UpdateUserRequestDTO;
+import com.r2s.ntt.dto.response.*;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface CartService {
-    List<Cart> getAllCartDatabase();
+    PagingResponseDTO getAllCart(Pageable pageable);
 
-    PageResponseDTO getCartPaging();
+    CartResponseDTO getCartById(Integer cartId);
 
-    Cart insertCart(InsertCartRequestDTO requestDTO);
+    CartResponseDTO createCart(CreateCartRequestDTO createCartRequestDTO);
 
-    CartResponseDTO getCartbyId(Integer id);
+    Boolean deleteCart(Integer cartId);
 
-    CartResponseDTO updateCart(UpdateCartRequestDTO requestDTO, Integer id);
+    Boolean deleteCartTemporarily(Integer cartId);
 
-    void deleteCartbyId(Integer id);
 }

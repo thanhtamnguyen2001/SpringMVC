@@ -1,4 +1,4 @@
-package r2s.com.demo.lab04.dto.response;
+package com.r2s.ntt.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,16 +9,18 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class AddressResponseDTO implements Serializable {
-    private int id;
-    private String name;
-    private String phone;
-    private String province;
-    private String district;
+
+    private Integer id;
+
+    private String apartmentNumber;
+
     private String street;
-    private boolean type;
-    private boolean defaultAddress;
-    private boolean isDeleted;
-    private int userId;
+
+    private String ward;
+
+    private String district;
+
+    private String province;
+
 }

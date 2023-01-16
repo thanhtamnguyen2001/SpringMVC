@@ -1,15 +1,20 @@
-package r2s.com.demo.lab04.dto.response;
+package com.r2s.ntt.dto.response;
 
+import com.r2s.ntt.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class CategoryResponseDTO implements Serializable {
-    private int id;
+
+    private Integer id;
+
     private String name;
 }

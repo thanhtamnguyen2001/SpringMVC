@@ -1,23 +1,24 @@
-package r2s.com.demo.lab04.service;
+package com.r2s.ntt.service;
 
-import r2s.com.demo.lab04.dto.request.InsertAddressRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateAddressRequestDTO;
-import r2s.com.demo.lab04.dto.response.AddressResponseDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.entity.Address;
+import com.r2s.ntt.dto.request.*;
+import com.r2s.ntt.dto.response.*;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface AddressService {
-    List<Address> getAllAddressDatabase();
 
-    PageResponseDTO getAddressPaging();
+    PagingResponseDTO getAllAddress(Pageable pageable);
 
-    Address insertAddress(InsertAddressRequestDTO requestDTO);
+    AddressResponseDTO getAddressById(Integer addressId);
 
-    AddressResponseDTO getAddressbyId(Integer id);
+    AddressResponseDTO createAddress(CreateAddressRequestDTO createAddressRequestDTO);
 
-    AddressResponseDTO updateAddress(UpdateAddressRequestDTO requestDTO, Integer id);
+    UpdateAddressResponseDTO updateAddress(Integer addressId, UpdateAddressRequestDTO updateAddressRequestDTO);
 
-    void deleteAddressbyId(Integer id);
+    Boolean deleteAddress(Integer addressId);
+
+    Boolean deleteAddressTemporarily(Integer addressId);
+
+
 }

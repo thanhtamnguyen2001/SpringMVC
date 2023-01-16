@@ -1,17 +1,17 @@
-package r2s.com.demo.lab04.repository;
+package com.r2s.ntt.repository;
 
+import com.r2s.ntt.entity.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-import r2s.com.demo.lab04.entity.Category;
-import r2s.com.demo.lab04.entity.User;
 
-import java.util.Locale;
 import java.util.Optional;
 
-@Repository
 public interface CategoryRepository extends CrudRepository<Category, Integer> {
+
+    Optional<Page<Category>> findAllByIsDeleted(Boolean isDeleted, Pageable pageable);
+
+    Boolean existsByName(String name);
 
     Optional<Page<Category>> findAll(Pageable pageable);
 }

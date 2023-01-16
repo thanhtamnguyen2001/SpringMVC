@@ -1,26 +1,29 @@
-package r2s.com.demo.lab04.service;
+package com.r2s.ntt.service;
 
-import r2s.com.demo.lab04.dto.request.InsertUserRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateUserRequestDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.dto.response.UserResponseDTO;
-import r2s.com.demo.lab04.entity.User;
+import com.r2s.ntt.dto.request.CreateProductRequestDTO;
+import com.r2s.ntt.dto.request.CreateUserRequestDTO;
+import com.r2s.ntt.dto.request.UpdateProductRequestDTO;
+import com.r2s.ntt.dto.request.UpdateUserRequestDTO;
+import com.r2s.ntt.dto.response.*;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUserDatabase();
 
-    PageResponseDTO getUserPaging();
+    PagingResponseDTO getAllUser(Pageable pageable);
 
-    User insertUser(InsertUserRequestDTO requestDTO);
+    UserResponseDTO getUserById(Integer userId);
 
-    UserResponseDTO getUserbyId(Integer id);
+    UserResponseDTO createUser(CreateUserRequestDTO createUserRequestDTO);
 
+    UpdateUserResponseDTO updateUser(Integer userId, UpdateUserRequestDTO updateUserRequestDTO);
 
-    UserResponseDTO updateUser(UpdateUserRequestDTO requestDTO, Integer id);
+    Boolean deleteUser(Integer userId);
 
-    void deleteUserbyId(Integer id);
+    Boolean deleteUserTemporarily(Integer userId);
 
-    UserResponseDTO getAddressByUserId(int userId);
+    ProductOfUserResponseDTO getProductByUserId(Integer userId);
+
+    AddressOfUserResponseDTO getAddressByUserId(Integer userId);
 }

@@ -1,57 +1,54 @@
-package r2s.com.ntt.lab04.controller;
+package com.r2s.ntt.controller;
 
+import com.r2s.ntt.dto.request.CreateOrderRequestDTO;
+import com.r2s.ntt.dto.request.UpdateOrderRequestDTO;
+import com.r2s.ntt.dto.response.*;
+import com.r2s.ntt.service.CategoryService;
+import com.r2s.ntt.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import r2s.com.demo.lab04.dto.request.InsertOrderRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateOrderRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateOrderRequestDTO;
-import r2s.com.demo.lab04.dto.response.OrderResponseDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.dto.response.OrderResponseDTO;
-import r2s.com.demo.lab04.dto.response.UserResponseDTO;
-import r2s.com.demo.lab04.entity.Order;
-import r2s.com.demo.lab04.service.OrderService;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@RestController()
-@RequestMapping(value = "/order")
+@RestController
+@RequestMapping("order")
 public class OrderController {
+
     @Autowired
-    private OrderService orderService;
+    OrderService orderService;
 
-    
-    @GetMapping
-    public ResponseEntity<?> getOrderPaging() {
-        PageResponseDTO pageResponseDTO = orderService.getOrderPaging();
-        return new ResponseEntity<>(pageResponseDTO, HttpStatus.OK);
+    @GetMapping(value = "/get-all")
+    public ResponseEntity getAllOrder(Pageable pageable) {
+
+        PagingResponseDTO pagingResponseDTO = this.orderService.getAllOrder(pageable);
+
+        return new ResponseEntity<>(pagingResponseDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{order-id}")
-    public ResponseEntity<?> getOrderById(@PathVariable(value = "order-id") int orderId) {
-        OrderResponseDTO OrderResponseDTO = orderService.getOrderbyId(orderId);
-        return new ResponseEntity<>(OrderResponseDTO, HttpStatus.OK);
+    @GetMapping(value = "/{order-id}")
+    public ResponseEntity getOrderById(@PathVariable("order-id") Integer orderId) {
+
+        OrderResponseDTO orderResponseDTO = this.orderService.getOrderById(orderId);
+
+        return new ResponseEntity<>(orderResponseDTO, HttpStatus.OK);
     }
-    
+
     @PostMapping
-    public ResponseEntity insertOrder(@RequestBody InsertOrderRequestDTO requestDTO) {
-        Order order = orderService.insertOrder(requestDTO);
-        return new ResponseEntity(order, HttpStatus.OK);
-    }
+    public ResponseEntity insertOrder(@RequestBody CreateOrderRequestDTO createOrderRequestDTO) {
+        OrderResponseDTO orderResponseDTO = this.orderService.createOrder(createOrderRequestDTO);
 
-    @PutMapping("/{order-id}")
-    public ResponseEntity updateOrder(@PathVariable(value = "order-id") int orderId,
-                                     @RequestBody UpdateOrderRequestDTO updateOrderRequestDTO) {
-        OrderResponseDTO response = orderService.updateOrder(updateOrderRequestDTO, orderId);
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity<>(orderResponseDTO, HttpStatus.OK);
     }
-
 
     @DeleteMapping("/{order-id}")
-    public ResponseEntity deleteOrder(@PathVariable(value = "order-id") int orderId) {
-        orderService.deleteOrderbyId(orderId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    public ResponseEntity deleteOrder(@PathVariable("order-id") Integer orderId) {
+        this.orderService.deleteOrderTemporarily(orderId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

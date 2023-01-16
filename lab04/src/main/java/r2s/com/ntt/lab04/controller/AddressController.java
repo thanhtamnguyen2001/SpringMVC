@@ -1,57 +1,63 @@
-package r2s.com.ntt.lab04.controller;
+package com.r2s.ntt.controller;
 
+import com.r2s.ntt.dto.request.CreateAddressRequestDTO;
+import com.r2s.ntt.dto.request.CreateUserRequestDTO;
+import com.r2s.ntt.dto.request.UpdateAddressRequestDTO;
+import com.r2s.ntt.dto.request.UpdateUserRequestDTO;
+import com.r2s.ntt.dto.response.*;
+import com.r2s.ntt.service.AddressService;
+import com.r2s.ntt.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import r2s.com.demo.lab04.dto.request.InsertAddressRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateAddressRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateAddressRequestDTO;
-import r2s.com.demo.lab04.dto.response.AddressResponseDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.dto.response.AddressResponseDTO;
-import r2s.com.demo.lab04.entity.Address;
-import r2s.com.demo.lab04.service.AddressService;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-@RestController()
-@RequestMapping(value = "/address")
+@RestController
+@RequestMapping(value = "address")
 public class AddressController {
+
     @Autowired
-    private AddressService addressService;
+    AddressService addressService;
 
+    @GetMapping(value = "/get-all")
+    public ResponseEntity getAllAddress(Pageable pageable) {
 
-    @GetMapping
-    public ResponseEntity<?> getAddressPaging() {
-        PageResponseDTO pageResponseDTO = addressService.getAddressPaging();
-        return new ResponseEntity<>(pageResponseDTO, HttpStatus.OK);
+        PagingResponseDTO pagingResponseDTO = addressService.getAllAddress(pageable);
+
+        return new ResponseEntity<>(pagingResponseDTO, HttpStatus.OK);
     }
-    
-    @GetMapping("/{address-id}")
-    public ResponseEntity<?> getAddressById(@PathVariable(value = "address-id") int addressId) {
-        AddressResponseDTO AddressResponseDTO = addressService.getAddressbyId(addressId);
-        return new ResponseEntity<>(AddressResponseDTO, HttpStatus.OK);
+
+    @GetMapping(value = "/{address-id}")
+    public ResponseEntity getAddressById(@PathVariable("address-id") Integer addressId) {
+        AddressResponseDTO addressResponseDTO = this.addressService.getAddressById(addressId);
+
+        return new ResponseEntity<>(addressResponseDTO, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity insertAddress(@RequestBody InsertAddressRequestDTO requestDTO) {
-        Address address = addressService.insertAddress(requestDTO);
-        return new ResponseEntity(address, HttpStatus.OK);
+    public ResponseEntity insertAddress(@RequestBody CreateAddressRequestDTO createAddressRequestDTO) {
+        AddressResponseDTO addressResponseDTO = this.addressService.createAddress(createAddressRequestDTO);
+
+        return new ResponseEntity<>(addressResponseDTO, HttpStatus.OK);
     }
 
     @PutMapping("/{address-id}")
-    public ResponseEntity updateAddress(@PathVariable(value = "address-id") int addressId,
+    public ResponseEntity updateAddress(@PathVariable("address-id") Integer addressId,
                                      @RequestBody UpdateAddressRequestDTO updateAddressRequestDTO) {
-        AddressResponseDTO response = addressService.updateAddress(updateAddressRequestDTO, addressId);
-        return new ResponseEntity(response, HttpStatus.OK);
+        UpdateAddressResponseDTO response = this.addressService.updateAddress(addressId, updateAddressRequestDTO);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{address-id}")
-    public ResponseEntity deleteAddress(@PathVariable(value = "address-id") int addressId) {
-        addressService.deleteAddressbyId(addressId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    public ResponseEntity deleteAddress(@PathVariable("address-id") Integer addressId) {
+        this.addressService.deleteAddressTemporarily(addressId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }

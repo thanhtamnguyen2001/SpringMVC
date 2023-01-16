@@ -1,28 +1,29 @@
-package r2s.com.demo.lab04.service;
+package com.r2s.ntt.service;
 
-import org.springframework.transaction.annotation.Transactional;
-import r2s.com.demo.lab04.dto.request.InsertCategoryRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateCategoryRequestDTO;
-import r2s.com.demo.lab04.dto.response.CategoryResponseDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.entity.Category;
+import com.r2s.ntt.dto.request.CreateCategoryRequestDTO;
+import com.r2s.ntt.dto.request.UpdateCategoryRequestDTO;
+import com.r2s.ntt.dto.response.CategoryResponseDTO;
+import com.r2s.ntt.dto.response.PagingResponseDTO;
+import com.r2s.ntt.dto.response.ProductOfCategoryResponseDTO;
+import com.r2s.ntt.dto.response.UpdateCategoryResponseDTO;
+import com.r2s.ntt.entity.Category;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface CategoryService {
-    List<Category> getAllCategoryDatabase();
+    PagingResponseDTO getAllCategory(Pageable pageable);
 
-    PageResponseDTO getCategoryPaging();
+    CategoryResponseDTO getCategoryById(Integer cateId);
 
-    @Transactional
-    Category insertCategory(InsertCategoryRequestDTO requestDTO);
+    CategoryResponseDTO createCategory(CreateCategoryRequestDTO createCategoryRequestDTO);
 
-    CategoryResponseDTO getCategorybyId(Integer id);
+    UpdateCategoryResponseDTO updateCategory(Integer cateId, UpdateCategoryRequestDTO updateCategoryRequestDTO);
 
-    @Transactional
-    CategoryResponseDTO updateCategory(UpdateCategoryRequestDTO requestDTO, Integer id);
+    Boolean deleteCategory(Integer cateId);
 
-    @Transactional
-    void deleteCategorybyId(Integer id);
+    Boolean deleteCategoryTemporarily(Integer cateId);
+
+    ProductOfCategoryResponseDTO getProductByCategoryId(Integer cateId);
+
 }
-

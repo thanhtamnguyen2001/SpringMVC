@@ -1,15 +1,23 @@
-package r2s.com.demo.lab04.dto.response;
+package com.r2s.ntt.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartResponseDTO implements Serializable {
-    private int id;
-    private int userId;
+
+    private Integer id;
+
+    private Date createdDate;
+
+    private Double totalPrice;
+
+    private List<CartItemResponseDTO> listCartLineItemResponseDTO;
 }

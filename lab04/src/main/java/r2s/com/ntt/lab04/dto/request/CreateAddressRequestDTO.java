@@ -1,4 +1,4 @@
-package r2s.com.demo.lab04.dto.request;
+package com.r2s.ntt.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,18 +7,18 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class CreateAddressRequestDTO implements Serializable {
-    private int id;
-    private String name;
-    private String phone;
-    private String province;
-    private String district;
+
+    private String apartmentNumber;
+
     private String street;
-    private boolean type;
-    private boolean defaultAddress;
-    private boolean isDeleted;
-    private int userId;
+
+    private String ward;
+
+    private String district;
+
+    private String province;
 
 }

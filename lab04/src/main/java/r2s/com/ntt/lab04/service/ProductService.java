@@ -1,23 +1,26 @@
-package r2s.com.demo.lab04.service;
+package com.r2s.ntt.service;
 
-import r2s.com.demo.lab04.dto.request.InsertProductRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateProductRequestDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.dto.response.ProductResponseDTO;
-import r2s.com.demo.lab04.entity.Product;
+import com.r2s.ntt.dto.request.CreateCategoryRequestDTO;
+import com.r2s.ntt.dto.request.CreateProductRequestDTO;
+import com.r2s.ntt.dto.request.UpdateCategoryRequestDTO;
+import com.r2s.ntt.dto.request.UpdateProductRequestDTO;
+import com.r2s.ntt.dto.response.*;
+import com.r2s.ntt.entity.Product;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface ProductService {
-    List<Product> getAllProductDatabase();
 
-    PageResponseDTO getProductPaging();
+    PagingResponseDTO getAllProduct(Pageable pageable);
 
-    Product insertProduct(InsertProductRequestDTO requestDTO);
+    ProductResponseDTO getProductById(Integer productId);
 
-    ProductResponseDTO getProductbyId(Integer id);
+    ProductResponseDTO createProduct(CreateProductRequestDTO createProductRequestDTO);
 
-    ProductResponseDTO updateProduct(UpdateProductRequestDTO requestDTO, Integer id);
+    UpdateProductResponseDTO updateProduct(Integer productId, UpdateProductRequestDTO updateProductRequestDTO);
 
-    void deleteProductbyId(Integer id);
+    Boolean deleteProduct(Integer productId);
+
+    Boolean deleteProductTemporarily(Integer productId);
 }

@@ -1,21 +1,22 @@
-package r2s.com.demo.lab04.dto.request;
+package com.r2s.ntt.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateUserRequestDTO implements Serializable {
-    private int id;
+
+    private String firstName;
+
+    private String lastName;
+
     private String username;
-    private String name;
+
     private String password;
-    private String phone;
-    private String gender;
-    private String email;
-    private Date birthday;
+
 }

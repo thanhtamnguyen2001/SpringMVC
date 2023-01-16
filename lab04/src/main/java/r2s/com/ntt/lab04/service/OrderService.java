@@ -1,23 +1,21 @@
-package r2s.com.demo.lab04.service;
+package com.r2s.ntt.service;
 
-import r2s.com.demo.lab04.dto.request.InsertOrderRequestDTO;
-import r2s.com.demo.lab04.dto.request.UpdateOrderRequestDTO;
-import r2s.com.demo.lab04.dto.response.OrderResponseDTO;
-import r2s.com.demo.lab04.dto.response.PageResponseDTO;
-import r2s.com.demo.lab04.entity.Order;
+import com.r2s.ntt.dto.request.CreateOrderRequestDTO;
+import com.r2s.ntt.dto.response.OrderResponseDTO;
+import com.r2s.ntt.dto.response.PagingResponseDTO;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface OrderService {
-    List<Order> getAllOrderDatabase();
 
-    PageResponseDTO getOrderPaging();
+    PagingResponseDTO getAllOrder(Pageable pageable);
 
-    Order insertOrder(InsertOrderRequestDTO requestDTO);
+    OrderResponseDTO getOrderById(Integer orderId);
 
-    OrderResponseDTO getOrderbyId(Integer id);
+    OrderResponseDTO createOrder(CreateOrderRequestDTO createOrderRequestDTO);
 
-    OrderResponseDTO updateOrder(UpdateOrderRequestDTO requestDTO, Integer id);
+    Boolean deleteOrder(Integer orderId);
 
-    void deleteOrderbyId(Integer id);
+    Boolean deleteOrderTemporarily(Integer orderId);
 }

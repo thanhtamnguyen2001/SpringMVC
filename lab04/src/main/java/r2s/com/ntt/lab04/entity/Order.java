@@ -1,26 +1,35 @@
-package r2s.com.demo.lab04.entity;
+package com.r2s.ntt.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
+
 @Data
-@Entity(name = "ORDERS")
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "\"ORDER\"")
 public class Order {
+
     @Id
-    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "TOTAL_PAY")
-    private long totalPay;
+    @Column(name = "TRANSPORTATION_FEE")
+    private Double transportationFee;
 
-    @Column(name = "ORDER_DATE")
-    private Date orderDate;
+    @Column(name = "TOTAL_PRICE")
+    private Double totalPrice;
 
-    @Column(name = "STATUS")
-    private boolean status;
+    @Column(name = "CREATED_DATE")
+    private Date createdDate;
 
-    @Column(name = "CART_ID")
-    private int cartId;
+    @Column(name = "UPDATED_DATE")
+    private Date updatedDate;
+
+    @Column(name = "IS_DELETED")
+    private Boolean isDeleted;
 }
